@@ -1,15 +1,13 @@
 import { BrowserRouter, Routes, Route } from "npm:react-router-dom";
-import { ReactNode, createContext, useCallback, useMemo, useEffect, useRef } from "react";
-import EditTask from "./pages/edit.tsx";
+import { useMemo, useEffect, useRef, useState } from "react";
 import Index from "./pages/index.tsx";
-
-export const ThemeContext = createContext<null>(null);
-export type Theme = 'light' | 'dark';
-
-interface RouteInterface{
-  path: string,
-  element: ReactNode,
-}
+import EditTask from "./pages/edit.tsx";
+import Error404 from "./pages/404.tsx";
+import { SERVER_URL } from "./config/secrets.js";
+import { Task, RouteInterface } from "./@types/interfaces.ts";
+import { Theme } from "./@types/types.ts"
+import { ThemeContext, TaskContext } from "./@contexts/contexts.tsx";
+import { createRouteObject, toggleTheme } from "./@utils/utils.ts";
 
 export default function App () {
 
@@ -19,28 +17,44 @@ export default function App () {
       document.documentElement.classList.add('dark')
   }, [])
 
-  const toggleTheme = useCallback(() => {
-    localStorage.setItem('theme', localStorage.getItem('theme') === 'dark' ? 'light' : 'dark');
-    document.documentElement.classList.toggle('dark');
-  }, []);
-
-  const createRouteObject = useCallback((path: string, element: ReactNode) => {
-    return {path, element}
-  }, []);
-
   const routes = useMemo(() => [
     createRouteObject('/', <Index /> ),
-    createRouteObject('/edit-task/:id', <EditTask /> )
+    createRouteObject('/edit-task/:id', <EditTask /> ),
+    createRouteObject('*', <Error404/> ),
   ], [])
 
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  // fetch tasks from a mock server
+  useEffect (() => {
+    let ignore = false;
+    (async () => {
+      try{
+        if (!ignore) {
+          let data = await fetch(`${SERVER_URL}/tasks`)
+          data = await data.json();
+          setTasks(prev => data.documents || [])
+        }
+      }
+      catch (error: any) {
+        console.error(error.message)
+      }
+    })();
+
+    return () => {
+      ignore = true;
+    }
+  }, []);
+
   return (
-    <ThemeContext.Provider value={toggleTheme} >
-      <BrowserRouter>
-          <button onClick={toggleTheme} >Change Theme</button>
-        <Routes>
-          {routes.map((route:RouteInterface, key:number) => <Route key={key} path={route.path} element={route.element} /> )}
-        </Routes>
-      </BrowserRouter>
-    </ThemeContext.Provider>
+    <TaskContext.Provider value={{tasks, setTasks}} >
+      <ThemeContext.Provider value={toggleTheme} >
+        <BrowserRouter>
+          <Routes>
+            {routes.map((route:RouteInterface, key:number) => <Route key={key} path={route.path} element={route.element} /> )}
+          </Routes>
+        </BrowserRouter>
+      </ThemeContext.Provider>
+    </TaskContext.Provider>
   )
 }
