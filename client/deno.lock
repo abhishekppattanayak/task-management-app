@@ -10,11 +10,13 @@
     "npm:autoprefixer@^10.4.20": "10.4.20_postcss@8.4.49",
     "npm:postcss@^8.4.49": "8.4.49",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
+    "npm:react-router-dom@*": "7.0.2_react@18.3.1_react-dom@18.3.1__react@18.3.1",
     "npm:react-router-dom@^7.0.2": "7.0.2_react@18.3.1_react-dom@18.3.1__react@18.3.1",
     "npm:react@^18.3.1": "18.3.1",
     "npm:tailwindcss@*": "3.4.15_postcss@8.4.49",
     "npm:tailwindcss@^3.4.15": "3.4.15_postcss@8.4.49",
-    "npm:vite@^5.4.9": "5.4.11"
+    "npm:vite@*": "5.4.11_@types+node@22.5.4",
+    "npm:vite@^5.4.9": "5.4.11_@types+node@22.5.4"
   },
   "npm": {
     "@alloc/quick-lru@5.2.0": {
@@ -23,7 +25,7 @@
     "@deno/vite-plugin@1.0.1_vite@5.4.11": {
       "integrity": "sha512-w5drKBzKrUuV3xXfW+kkVxFpAlLELTwpLmN8Fwzw21wCew8SaR/AXPYbpUvIxdl8P61J52ufUez/kSalOD5sKA==",
       "dependencies": [
-        "vite"
+        "vite@5.4.11"
       ]
     },
     "@esbuild/aix-ppc64@0.21.5": {
@@ -331,7 +333,7 @@
       "integrity": "sha512-y0byko2b2tSVVf5Gpng1eEhX1OvPC7x8yns1Fx8jDzlJp4LS6CMkCPfLw47cjyoMrshQDoQw4qcgjsU9VvlCew==",
       "dependencies": [
         "@swc/core",
-        "vite"
+        "vite@5.4.11"
       ]
     },
     "ansi-regex@5.0.1": {
@@ -979,6 +981,16 @@
     "vite@5.4.11": {
       "integrity": "sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==",
       "dependencies": [
+        "esbuild",
+        "fsevents",
+        "postcss",
+        "rollup"
+      ]
+    },
+    "vite@5.4.11_@types+node@22.5.4": {
+      "integrity": "sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==",
+      "dependencies": [
+        "@types/node",
         "esbuild",
         "fsevents",
         "postcss",
