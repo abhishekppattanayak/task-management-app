@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
 
-export interface Task {
+export interface TaskInterface {
   id: string,
   title: string,
   status: "Pending" | "Completed",
   priority: "High" | "Medium" | "Low",
-  dueDate: string
+  dueDate: string,
+  group: string
 }
 
 export interface RouteInterface{
