@@ -41,16 +41,15 @@ export async function updateTask (id: string, newTask:TaskInterface) {
   }
 }
 
-export async function updateChecked (id: string, status: boolean) {
+export async function updateChecked (id: string, status: string) {
   try {
-    const st = status ? "Completed": "Pending"
     let res = await fetch(`${SERVER_URL}/tasks/${id}`, {
       mode: "cors",
       method: 'POST',
       headers: {
         'Accept' : '*/*'
       },
-      body: createFormData({status: st})
+      body: createFormData({status: status})
     })
   }
   catch {

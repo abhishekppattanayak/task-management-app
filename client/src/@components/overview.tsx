@@ -9,6 +9,7 @@ import { updateChecked } from "../@utils/utils.ts";
 
 function TaskItem (props:TaskInterface) {
   const { setTasks } = useContext(TaskContext);
+  const _id = useMemo(() => props._id, []);
 
   const [completed, setCompleted] = useState<boolean>(props.status === "Completed")
   const toggleChecked = useCallback((event:React.ChangeEvent<HTMLInputElement>) => {
@@ -18,9 +19,9 @@ function TaskItem (props:TaskInterface) {
 
   useEffect(() => {
     const st = completed ? "Completed" : "Pending"
-    setTasks((prev:TaskInterface[]) => prev.map(p => p._id===props._id ? {...p, status: st } : p ));
+    setTasks((prev:TaskInterface[]) => prev.map(p => p._id===_id ? {...p, status: st } : p ));
     (async()=>{
-      await updateChecked(props._id, completed)
+      await updateChecked(_id, st)
     })()
   }, [completed])
 
