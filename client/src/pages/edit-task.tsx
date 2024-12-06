@@ -45,7 +45,10 @@ export default function EditTask () {
           <Select id={"edit-priority"} label={"Priority"} options={["High", "Medium", "Low"]} value={priorityState} setValue={setPriorityState} />
           <Radio groupName={"Status"} radios={["Completed", "Pending"]} value={statusState} setValue={setStatusStatus}  />
           <DueDate id={"edit-due"} value={dueState} setValue={setDueState} />
-          <button type="submit" onClick={handleSubmit} className="bg-black dark:bg-white text-white dark:text-black rounded-sm self-center px-8 py-1 " >Save</button>
+          <span className="self-center *:mx-4 " >
+            <button type="submit" onClick={handleSubmit} className="bg-black dark:bg-white text-white dark:text-black rounded-sm px-8 py-1 " >Save</button>
+            <button onClick={(e)=>{e.preventDefault(); navigate(-1)}} className="px-8 py-1 rounded-sm hover:bg-neutral-300 hover:dark:bg-neutral-950 " >Cancel</button>
+          </span>
         </fieldset>
       </form>
     </div>

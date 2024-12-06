@@ -43,7 +43,10 @@ export default function AddTask () {
           <Input id={'add-title'} label={"Title"} value={title} setValue={setTitle}  />
           <Select id={'add-priority'} label={"Priority"} value={priority} setValue={setPriority} options={["High", "Medium", "Low"]} />
           <DueDate id={'add-due'} value={due} setValue={SetDue} />
-          <button onClick={handleSubmit} type="submit" className="bg-black text-white dark:bg-white dark:text-black self-center px-8 py-1 rounded-sm" >Add</button>
+          <span className="self-center *:mx-4" >
+            <button onClick={handleSubmit} type="submit" className="bg-black text-white dark:bg-white dark:text-black px-8 py-1 rounded-sm" >Add</button>
+            <button onClick={(e)=>{e.preventDefault(); navigate(-1)}} className="px-8 py-1 rounded-sm hover:bg-neutral-300 hover:dark:bg-neutral-950" >Cancel</button>
+          </span>
         </fieldset>
       </form>
     </div>
