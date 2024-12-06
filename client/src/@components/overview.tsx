@@ -74,7 +74,7 @@ function TaskList () {
     <div className="px-4 py-4 h-screen flex flex-col overflow-scroll " >
       <div className="flex justify-between items-center" >
         <h1 className="font-bold text-xl my-2" >Tasklist</h1>
-        <button onClick={()=>navigate('/add-task')} className="bg-neutral-500 dark:bg-neutral-700 px-4 rounded-sm text-nowrap " >Add Task</button>
+        <button onClick={()=>navigate('/add-task')} className="text-white bg-neutral-500 dark:bg-neutral-700 px-4 rounded-sm text-nowrap " >Add Task</button>
       </div>
       <input type="text" value={search} onChange={handleChange} placeholder="Search tasks" className="px-2 py-1 bg-neutral-200 hover:bg-neutral-300 dark:bg-white hover:dark:bg-neutral-200 text-black rounded-sm placeholder:text-black/75 w-full " />
       <ul className="flex-grow overflow-scroll my-4" >
