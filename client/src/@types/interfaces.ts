@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export interface TaskInterface {
+  _id: string,
   id: string,
   title: string,
   status: "Pending" | "Completed",
