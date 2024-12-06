@@ -56,3 +56,34 @@ export async function updateChecked (id: string, status: string) {
     //
   }
 }
+
+export async function addNewTask (task: object) {
+  try {
+    let res = await fetch(`${SERVER_URL}/new`, {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        'Accept' : '*/*'
+      },
+      body: createFormData(task)
+    })
+  }
+  catch {
+    // 
+  }
+}
+
+export async function deleteTask (id: string) {
+  try {
+    let res = await fetch(`${SERVER_URL}/task/${id}`, {
+      mode: "cors",
+      method: "DELETE",
+      headers: {
+        'Accept' : '*/*'
+      },
+    })
+  }
+  catch {
+    //
+  }
+}

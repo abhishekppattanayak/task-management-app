@@ -48,7 +48,7 @@ router.post('/tasks/:id', async (ctx) => {
       }
     }
     else {
-      throw Error("Unsuccessful")
+      throw Error("Unsuccessful in updating task")
     }
   }
   catch (error: any) {
@@ -56,6 +56,56 @@ router.post('/tasks/:id', async (ctx) => {
     ctx.response.body = {
       message: error.message
     }
+  }
+})
+
+router.post('/new', async (ctx) => {
+  try {
+    let task = await ctx.request.body.formData();
+    task = Object.fromEntries(task)
+
+    const res = await tasks.insertOne(task);
+
+    if (res.acknowledged) {
+      ctx.response.status = 200
+      ctx.response.body = {
+        message: "Successfully added new task"
+      }
+    }
+    else {
+      throw Error("Unsuccessful in adding new task")
+    }
+  }
+  catch (error: any)  {
+    ctx.response.status = 501;
+    ctx.response.body = {
+      message: error.message
+    }
+  }
+})
+
+router.delete('/task/:id', async (ctx) => {
+  try {
+    const id = ctx.params.id;
+    const _id = new ObjectId(id);
+
+    const res = await tasks.deleteOne({_id: _id})
+
+    if (res.acknowledged) {
+      ctx.response.status = 200;
+      ctx.response.body = {
+        message: "Successfully deleted a task"
+      }
+    }
+    else {
+      throw Error('Unsuccessful.')
+    }
+  }
+  catch (error:any) {
+    ctx.response.status = 502;
+    ctx.response.body = {
+      message: error.message
+    };
   }
 })
 
