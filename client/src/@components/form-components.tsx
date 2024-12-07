@@ -13,8 +13,9 @@ export function Select ({id, label, options, value, setValue}) {
   return (
     <div className=" flex flex-row gap-4 items-center" >
       <label htmlFor={id}>{label}</label>
-      <select name={label} id={id} className="bg-neutral-200 dark:bg-black hover:bg-neutral-200 hover:dark:bg-neutral-800  px-4 py-2 rounded-md" 
-      value={value} onChange={(e)=>{setValue(e.target.value)}} >
+      <select name={label} id={id} className="bg-neutral-200 dark:bg-black hover:bg-neutral-200 hover:dark:bg-neutral-900  px-4 py-2 rounded-md" 
+      value={value || ""} onChange={(e)=>{setValue(e.target.value)}} >
+        <option value="" disabled>Select an option</option>
         {options.map( (option:string, index:number) => <option key={index} value={option}>{option}</option> )}
       </select>
     </div>

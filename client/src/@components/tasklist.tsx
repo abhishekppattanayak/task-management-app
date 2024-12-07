@@ -1,5 +1,5 @@
 import { useState, useContext, useMemo, useCallback, useEffect } from "react";
-import { TaskContext } from "../@contexts/contexts.tsx";
+import { FilterContext, TaskContext } from "../@contexts/contexts.tsx";
 import { TaskInterface } from "../@types/interfaces.ts";
 import { Checked, Unchecked } from "./check.tsx";
 import { priorityColor } from "../@utils/utils.ts";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { updateChecked } from "../@utils/utils.ts";
 import DeleteSvg from "./delete.svg.tsx";
 import DeleteModal from "./delete-modal.tsx";
+import FilterBadgeList from "./filterbadgelist.tsx";
 
 
 function TaskItem (props: any) {
@@ -56,15 +57,18 @@ function TaskItem (props: any) {
 export default function TaskList () {
 
   const { tasks }: {tasks: TaskInterface[]} = useContext(TaskContext);
+  const { filteredTasks }: {filteredTasks: TaskInterface[]} = useContext(FilterContext)
 
   const [search, setSearch] = useState<string>("");
-  const regex = useMemo(() => new RegExp(`${search}.*`, 'i'), [search]);
   
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   }, []);
 
-  const tasklist = useMemo(() => tasks.filter((t:TaskInterface) => t.title.match(regex)), [tasks, regex])
+  const tasklist = useMemo(
+    () => filteredTasks.filter((task: TaskInterface) => task.title.toLowerCase().includes(search.toLowerCase())),
+    [filteredTasks, search]
+  );
 
   const navigate = useNavigate();
 
@@ -78,8 +82,12 @@ export default function TaskList () {
         <button onClick={()=>navigate('/add-task')} className="text-white bg-neutral-500 dark:bg-neutral-700 px-4 rounded-sm text-nowrap " >Add Task</button>
       </div>
       <input type="text" value={search} onChange={handleChange} placeholder="Search tasks" className="px-2 py-1 bg-neutral-200 hover:bg-neutral-300 dark:bg-white hover:dark:bg-neutral-200 text-black rounded-sm placeholder:text-black/75 w-full " />
+      <FilterBadgeList />
+      
       <ul className="flex-grow overflow-scroll my-4" >
-        {tasklist.map((taskObject:TaskInterface, index:number) => <TaskItem key={index} {...taskObject} setTaskId={()=>{setTaskId(taskObject._id)}} openModal={()=>{setModal(true)}} /> )}
+        { tasklist.length === 0 ? 
+          <p className="italic text-xl " >No tasks</p>
+         : tasklist.map((taskObject:TaskInterface) => <TaskItem key={taskObject.id} {...taskObject} setTaskId={()=>{setTaskId(taskObject._id)}} openModal={()=>{setModal(true)}} /> )}
       </ul>
       {modal && 
         <DeleteModal closeModal={()=>{setModal(false)}} taskId={taskId} /> 
