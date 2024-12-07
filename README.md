@@ -11,3 +11,16 @@ A fullstack task management application with data persistence
 5. Run `docker-compose up --build`.
 6. Open `localhost:5173` in a browser.
 7. To stop, run `docker-compose down`.
+
+## Tech stack
+
+* Frontend : Vite + React + Typescript
+* Backend : Deno + Oak
+* Database : MongoDB
+
+## Features
+
+1. Filters for easier management
+2. Quick search bar
+3. Confirmation modal for deleting a task
+4. Data stored on an external database
