@@ -24,3 +24,7 @@ A fullstack task management application with data persistence
 2. Quick search bar
 3. Confirmation modal for deleting a task
 4. Data stored on an external database
+
+## System Architecture
+
+![system-architecture.png](system-architecture.png)
