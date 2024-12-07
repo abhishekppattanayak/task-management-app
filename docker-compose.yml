@@ -1,0 +1,37 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+    container_name: react-container
+    
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    volumes:
+      - ./database/data/db:/data/db
+      - ./database/data/init:/docker-entrypoint-initdb.d
+    ports:
+      - "30000:27017"
+    networks:
+      - app-network
+    container_name: mongo-container
+  
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    container_name: deno-container
+
+networks:
+  app-network:
+    driver: bridge
