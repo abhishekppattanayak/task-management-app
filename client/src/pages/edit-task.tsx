@@ -39,7 +39,7 @@ export default function EditTask () {
   return (
     <div className="h-screen dark:bg-neutral-900 dark:text-white flex justify-center items-center ">
       <form className="mx-4 w-full md:w-1/2 " >
-        <fieldset className="px-24 py-12 flex flex-col gap-4 rounded-md border-2 border-black dark:border-white" >
+        <fieldset className="px-8 md:px-16 lg:px-24 py-12 flex flex-col gap-4 rounded-md border-2 border-black dark:border-white" >
           <h1 className="font-bold dark:text-white text-xl text-center" >Edit Task</h1>
           <Input id={"edit-title"} label={"Title"} value={titleState} setValue={setTitleState}  />
           <Select id={"edit-priority"} label={"Priority"} options={["High", "Medium", "Low"]} value={priorityState} setValue={setPriorityState} />
