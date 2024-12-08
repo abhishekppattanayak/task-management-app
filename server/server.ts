@@ -4,7 +4,7 @@ import { MongoClient, ObjectId } from "npm:mongodb";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 
 const PORT = 8000;
-const DATABASE_URL = "mongodb://mongo-container:27017"
+const DATABASE_URL = Deno.env.get('DATABASE_URL') || '';
 
 const client = new MongoClient(DATABASE_URL);
 
