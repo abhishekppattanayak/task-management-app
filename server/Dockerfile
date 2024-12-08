@@ -4,7 +4,7 @@ EXPOSE 8000
 
 WORKDIR /app
 
-ENV DATABASE_URL = mongodb://mongo-container:27017
+ENV DATABASE_URL="mongodb://mongo-container:27017"
 
 COPY . /app/
 

@@ -4,7 +4,7 @@ EXPOSE 5173
 
 WORKDIR /app
 
-ENV VITE_SERVER_URL = http://localhost:8000
+ENV VITE_SERVER_URL=http://localhost:8000
 
 COPY . /app/
 
