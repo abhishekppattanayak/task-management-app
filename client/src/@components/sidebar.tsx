@@ -6,7 +6,7 @@ import { Select } from "./form-components.tsx";
 
 export default function Sidebar ({className} : { className: string }) {
 
-  const { statusFilter, setStatusFilter, priorityFilter, setPriorityFilter } = useContext(FilterContext)
+  const { statusFilter, setStatusFilter, priorityFilter, setPriorityFilter, dateSort, setDateSort } = useContext(FilterContext);
 
   const [open, setOpen] = useState(false)
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -21,6 +21,8 @@ export default function Sidebar ({className} : { className: string }) {
       <Select id='filter-status' label='Filter by status' options={['Completed', 'Pending']} setValue={setStatusFilter} value={statusFilter}  />
 
       <Select id='filter-priority' label='Filter by priority' options={['High', 'Medium', 'Low']} setValue={setPriorityFilter} value={priorityFilter} />
+
+      <Select id='sort-date' label='Sort by Due Date' options={['Ascending', 'Descending']} setValue={setDateSort} value={dateSort} />
 
       <button onClick={()=>{toggleTheme()}} className="px-3 py-1.5 rounded-md bg-black text-white dark:bg-white dark:text-black w-32 self-center" >{theme !== 'dark' ? "Light Mode" : "Dark Mode"}</button>
 

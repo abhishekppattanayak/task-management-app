@@ -46,7 +46,7 @@ export function DueDate ({id, value, setValue}) {
   return (
     <div className="flex gap-8 items-center ">
       <label htmlFor={id}>Due Date</label>
-      <input type="date" id={id} min={getToday()} value={value} onChange={(e)=>{setValue(e.target.value)}} className="bg-neutral-200 dark:bg-black px-2 py-1 rounded-md" />
+      <input type="date" id={id} min={getToday()} value={value} onChange={(e)=>{console.log(e.target.value); setValue(e.target.value)}} className="bg-neutral-200 dark:bg-black px-2 py-1 rounded-md" />
     </div>
   )
 }

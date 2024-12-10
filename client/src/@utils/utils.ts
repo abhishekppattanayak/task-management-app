@@ -11,7 +11,7 @@ export function priorityColor (priority: string) : string {
 }
 
 export function getToday () {
-  return (new Date).toLocaleDateString('en-CA')
+  return (new Date()).toLocaleDateString('en-CA')
 }
 
 function createFormData (data: object)  {
